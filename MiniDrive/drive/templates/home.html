@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MiniDrive Home</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="{% static 'drive/home.css' %}">
+</head>
+<body>
+	<!-- Header -->
+	<header>
+		<div class="logo-container">
+			<i class="fas fa-cloud-upload-alt logo-icon"></i>
+			<h1>MiniDrive</h1>
+		</div>
+		<form class="search-form" method="get" action="/search/">
+			<div class="search-container">
+				<i class="fas fa-search search-icon"></i>
+				<input type="text" name="q" placeholder="Search files...">
+				<button type="submit" class="icon-button"><i class="fas fa-arrow-right"></i></button>
+			</div>
+		</form>
+		<div class="header-buttons">
+			<button class="upload-btn" onclick="location.href='/upload/'"><i class="fas fa-upload"></i> Upload</button>
+			<button class="folder-btn" onclick="location.href='/new-folder/'"><i class="fas fa-folder-plus"></i> New Folder</button>
+			<div class="user-profile">
+				<img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" alt="User" class="avatar">
+			</div>
+		</div>
+	</header>
+	<div class="main-container">
+		<!-- Sidebar -->
+		<nav class="sidebar">
+			<ul class="nav-links">
+				<li class="nav-item active">
+					<a href="/"><i class="fas fa-hdd"></i> My Drive</a>
+				</li>
+				<li class="nav-item">
+					<a href="/shared/"><i class="fas fa-users"></i> Shared with me</a>
+				</li>
+				<li class="nav-item">
+					<a href="/recent/"><i class="fas fa-clock"></i> Recent</a>
+				</li>
+				<li class="nav-item">
+					<a href="/starred/"><i class="fas fa-star"></i> Starred</a>
+				</li>
+				<li class="nav-item">
+					<a href="/trash/"><i class="fas fa-trash"></i> Trash</a>
+				</li>
+			</ul>
+			
+	
+		</nav>
+		<!-- Main Content -->
+		<main class="content">
+			<div class="content-header">
+				<h2>My Files</h2>
+				<div class="view-options">
+					<button class="view-btn active"><i class="fas fa-th"></i></button>
+					<button class="view-btn"><i class="fas fa-list"></i></button>
+				</div>
+			</div>
+			
+			
+			<div class="content-section">
+				<div class="section-header">
+					<h3>All Files</h3>
+					<div class="sort-options">
+						<span>Sort by: </span>
+						<select>
+							<option>Last Modified</option>
+							<option>Name</option>
+							<option>Size</option>
+						</select>
+					</div>
+				</div>
+                <div class="action-bar">
+				<div class="bulk-actions">
+					<button class="action-btn"><i class="fas fa-trash"></i> Delete</button>
+					<button class="action-btn"><i class="fas fa-share"></i> Share</button>
+					<button class="action-btn"><i class="fas fa-download"></i> Download</button>
+				</div>
+			</div>
+				
+			
+			
+		</main>
+	</div>
+	
+	<!-- Context Menu -->
+	<div class="context-menu" style="display: none;">
+		<ul class="menu-options">
+			<li><i class="fas fa-eye"></i> Preview</li>
+			<li><i class="fas fa-share"></i> Share</li>
+			<li><i class="fas fa-download"></i> Download</li>
+			<li><i class="fas fa-edit"></i> Rename</li>
+			<li><i class="fas fa-trash"></i> Delete</li>
+		</ul>
+	</div>
+	
+	<!-- Upload Modal (Hidden by default) -->
+	<div class="modal" id="uploadModal" style="display: none;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3>Upload Files</h3>
+				<button class="close-btn">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="upload-area">
+					<i class="fas fa-cloud-upload-alt"></i>
+					<p>Drag & drop files here or</p>
+					<label class="file-input-label">
+						Browse Files
+						<input type="file" multiple style="display: none;">
+					</label>
+				</div>
+				<div class="upload-progress" style="display: none;">
+					<div class="file-preview">
+						<span>document.pdf</span>
+						<div class="progress-bar">
+							<div class="progress" style="width: 65%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="cancel-btn">Cancel</button>
+				<button class="upload-btn">Upload</button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Simple JavaScript for demonstration -->
+	<script>
+		// This would be expanded in a real application
+		document.addEventListener('DOMContentLoaded', function() {
+			console.log('MiniDrive interface loaded');
+			// Toggle between grid and list views would go here
+		});
+	</script>
+</body>
+</html>
