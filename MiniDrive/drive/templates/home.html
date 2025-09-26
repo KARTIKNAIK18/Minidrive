@@ -7,6 +7,68 @@
 	<title>MiniDrive Home</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="{% static 'drive/home.css' %}">
+	
+	<!-- Custom template filter for file extensions -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			function getFileExtension(filename) {
+				return filename.split('.').pop().toLowerCase();
+			}
+			
+			document.querySelectorAll('.file-row').forEach(function(row) {
+				const filename = row.querySelector('.file-name').textContent;
+				const extension = getFileExtension(filename);
+				const iconContainer = row.querySelector('.file-icon-container');
+				
+				if (iconContainer) {
+					switch(extension) {
+						case 'pdf':
+							iconContainer.classList.add('pdf-icon');
+							iconContainer.innerHTML = '<i class="fas fa-file-pdf file-icon"></i>';
+							break;
+						case 'doc':
+						case 'docx':
+							iconContainer.classList.add('doc-icon');
+							iconContainer.innerHTML = '<i class="fas fa-file-word file-icon"></i>';
+							break;
+						case 'xls':
+						case 'xlsx':
+							iconContainer.classList.add('xls-icon');
+							iconContainer.innerHTML = '<i class="fas fa-file-excel file-icon"></i>';
+							break;
+						case 'ppt':
+						case 'pptx':
+							iconContainer.classList.add('ppt-icon');
+							iconContainer.innerHTML = '<i class="fas fa-file-powerpoint file-icon"></i>';
+							break;
+						case 'zip':
+						case 'rar':
+							iconContainer.classList.add('zip-icon');
+							iconContainer.innerHTML = '<i class="fas fa-file-archive file-icon"></i>';
+							break;
+						case 'mp3':
+						case 'wav':
+							iconContainer.classList.add('audio-icon');
+							iconContainer.innerHTML = '<i class="fas fa-file-audio file-icon"></i>';
+							break;
+						case 'mp4':
+						case 'mov':
+							iconContainer.classList.add('video-icon');
+							iconContainer.innerHTML = '<i class="fas fa-file-video file-icon"></i>';
+							break;
+						case 'jpg':
+						case 'jpeg':
+						case 'png':
+						case 'gif':
+							// We'll handle images separately
+							break;
+						default:
+							iconContainer.innerHTML = '<i class="fas fa-file-alt file-icon"></i>';
+					}
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<!-- Header -->
@@ -75,6 +137,82 @@
 							<option>Size</option>
 						</select>
 					</div>
+				</div>
+
+				<div class="files-table-container">
+					<table class="files-table">
+						<thead>
+							<tr>
+								<th class="file-name-header">Name</th>
+								<th class="file-owner-header">Owner</th>
+								<th class="file-date-header">Last Modified</th>
+								<th class="file-size-header">File Size</th>
+								<th class="file-actions-header"></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% if files %}
+								{% for file in files %}
+								<tr class="file-row">
+									<td class="file-name-cell">
+										<a href="{{ file.url }}" target="_blank" class="file-link">
+											<div class="file-info">
+												{% if ".jpg" in file.filename|lower or ".jpeg" in file.filename|lower or ".png" in file.filename|lower or ".gif" in file.filename|lower %}
+													<div class="file-thumbnail">
+														<img src="{{ file.url }}" alt="{{ file.filename }}" class="thumbnail-img">
+														<div class="image-overlay">
+															<i class="fas fa-image"></i>
+														</div>
+													</div>
+												{% else %}
+													<div class="file-icon-container">
+														<i class="fas fa-file-alt file-icon"></i>
+													</div>
+												{% endif %}
+												<span class="file-name">{{ file.filename }}</span>
+											</div>
+										</a>
+									</td>
+									<td class="file-owner-cell">
+										<div class="owner-info">
+											<img src="https://ui-avatars.com/api/?name=User&size=24&background=0D8ABC&color=fff" alt="Owner" class="owner-avatar">
+											<span>You</span>
+										</div>
+									</td>
+									<td class="file-date-cell">Sep 26, 2025</td>
+									<td class="file-size-cell">2.4 MB</td>
+									<td class="file-actions-cell">
+										<div class="row-actions">
+											<button class="row-action-btn" title="Share">
+												<i class="fas fa-share-alt"></i>
+											</button>
+											<button class="row-action-btn" title="Download">
+												<i class="fas fa-download"></i>
+											</button>
+											<button class="row-action-btn" title="More">
+												<i class="fas fa-ellipsis-v"></i>
+											</button>
+										</div>
+									</td>
+								</tr>
+								{% endfor %}
+							{% else %}
+								<tr>
+									<td colspan="5" class="empty-state">
+										<div class="no-files">
+											<i class="fas fa-folder-open no-files-icon"></i>
+											<h3>No files found</h3>
+											<p>Upload your first file to get started</p>
+										</div>
+									</td>
+								</tr>
+							{% endif %}
+						</tbody>
+					</table>
+				</div>
+
+
+
 				</div>
                 <div class="action-bar">
 				<div class="bulk-actions">
