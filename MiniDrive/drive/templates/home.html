@@ -85,7 +85,7 @@
 			</div>
 		</form>
 		<div class="header-buttons">
-			<button class="upload-btn" onclick="location.href='/upload/'"><i class="fas fa-upload"></i> Upload</button>
+			<button class="upload-btn" onclick="location.href='/home/upload/'"><i class="fas fa-upload"></i> Upload</button>
 			<button class="folder-btn" onclick="location.href='/new-folder/'"><i class="fas fa-folder-plus"></i> New Folder</button>
 			<div class="user-profile">
 				<img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" alt="User" class="avatar">
@@ -119,16 +119,16 @@
 		<main class="content">
 			<div class="content-header">
 				<h2>My Files</h2>
-				<div class="view-options">
+				{% comment %} <div class="view-options">
 					<button class="view-btn active"><i class="fas fa-th"></i></button>
 					<button class="view-btn"><i class="fas fa-list"></i></button>
-				</div>
+				</div> {% endcomment %}
 			</div>
 			
 			
 			<div class="content-section">
 				<div class="section-header">
-					<h3>All Files</h3>
+					<h3>	</h3>
 					<div class="sort-options">
 						<span>Sort by: </span>
 						<select>
@@ -214,13 +214,7 @@
 
 
 				</div>
-                <div class="action-bar">
-				<div class="bulk-actions">
-					<button class="action-btn"><i class="fas fa-trash"></i> Delete</button>
-					<button class="action-btn"><i class="fas fa-share"></i> Share</button>
-					<button class="action-btn"><i class="fas fa-download"></i> Download</button>
-				</div>
-			</div>
+
 				
 			
 			

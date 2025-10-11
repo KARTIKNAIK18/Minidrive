@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniDrive - Upload File</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'drive/upload.css' %}">
+</head>
+<body>
+    <div class="upload-container">
+        <h2><i class="fas fa-cloud-upload-alt"></i> Upload to MiniDrive</h2>
+        <p>Select a file from your device to upload to your cloud storage</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="file-input">
+                <input type="file" name="file" id="file" required>
+                <label for="file">
+                    <span>Drag & drop files here or click to browse</span>
+                </label>
+                <span id="file-name">No file selected</span>
+            </div>
+
+            <button type="submit" class="upload-btn">
+                <i class="fas fa-upload"></i> Upload File
+            </button>
+        </form>
+
+        {% if messages %}
+        <div class="result">
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% if uploaded_file_url %}
+                <a href="{{ uploaded_file_url }}" target="_blank">View Uploaded File</a>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error-message">
+            <i class="fas fa-exclamation-triangle"></i> {{ error }}
+        </div>
+        {% endif %}
+
+        <a href="/home" class="back-link"><i class="fas fa-arrow-left"></i> Back to My Files</a>
+    </div>
+
+    <script>
+        // Show selected file name
+        const fileInput = document.getElementById("file");
+        const fileName = document.getElementById("file-name");
+        const fileLabel = document.querySelector(".file-input label");
+
+        fileInput.addEventListener("change", () => {
+            if (fileInput.files.length > 0) {
+                fileName.textContent = fileInput.files[0].name;
+                fileName.style.display = "block";
+                fileLabel.classList.add("file-selected");
+            } else {
+                fileName.textContent = "No file selected";
+                fileLabel.classList.remove("file-selected");
+            }
+        });
+
+        // Drag and drop functionality
+        const dropArea = document.querySelector(".file-input label");
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight() {
+            dropArea.classList.add('highlight');
+        }
+
+        function unhighlight() {
+            dropArea.classList.remove('highlight');
+        }
+
+        dropArea.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                fileInput.files = files;
+                fileName.textContent = files[0].name;
+                fileName.style.display = "block";
+                fileLabel.classList.add("file-selected");
+            }
+        }
+    </script>
+</body>
+</html>
