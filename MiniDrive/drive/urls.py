@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.Get_files),
-    path('upload/', views.Put_Files)
+    path('upload/', views.Post_Files, name = 'upload_file')
 
     
 ]

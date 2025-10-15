@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 import requests
+from django.http import JsonResponse
 from decouple import config
 from django.core.files.storage  import FileSystemStorage
 from django.contrib import messages
+import base64
 
 # Create your views here.
 API_URL = config("API_URL")
-FILE_PATH = ""
+
 
 # def Home(request):
 #     return render(request, 'home.html')
@@ -23,43 +25,30 @@ def Get_files(request):
         print("Error fetching files",e)
     return render(request, "home.html",{"files": files})
 
-def Put_Files(request):
+def Post_Files(request):
     if request.method == "POST" and request.FILES.get("file"):
-        uploaded_file = request.FILES['file']
-        
-        # Create a proper multipart/form-data request
-        files = {
-            'file': (uploaded_file.name, uploaded_file, uploaded_file.content_type)
+        uploading_file = request.FILES["file"]
+
+        filedata = base64.b64encode(uploading_file.read()).decode('utf-8')
+
+        payload = {
+                "filename":uploading_file.name,
+                "filedata": filedata
         }
-        
+        headers = {"Content-Type": "application/json"}
         try:
-            # Print debug information
-            print(f"Attempting to upload file: {uploaded_file.name}")
-            print(f"API URL: {API_URL}")
+            response = requests.post(API_URL, json=payload, headers=headers)
             
-            # Make the request to the API
-            response = requests.post(API_URL, files=files)
+            if response.status_code == 200:
+                messages.success(request,"Files uploded successfully")
+            else:
+                messages.error(request,f"error occured in uploading file{response.text}")
             
-            # Print response details for debugging
-            print(f"Response status: {response.status_code}")
-            print(f"Response content: {response.text[:200]}...")  # Print first 200 chars
-            
-            response.raise_for_status()  # Raise an exception for 4XX/5XX responses
-            
-            # Process successful response
-            result = response.json()
-            file_url = result.get('url', '#')  # Get the URL from result or use # as fallback
-            
-            messages.success(request, f'File "{uploaded_file.name}" uploaded successfully!')
-            return render(request, "upload.html", {
-                "uploaded_file_url": file_url,
-                "result": result
-            })
-        
         except Exception as e:
-            print(f"Error uploading file: {e}")
-            return render(request, "upload.html", {"error": "Failed to upload file"})
-    
+            messages.error(request,f"Upload failed: {str(e)}") 
+
+        return redirect('upload_file')       
+
     # If it's a GET request or no file was provided
     return render(request, "upload.html")
 
