@@ -1,7 +1,7 @@
 # MiniDrive
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/KARTIKNAIK18/Minidrive/main/MiniDrive/drive/static/drive/logo.png" alt="MiniDrive Logo" width="200" height="auto">
+  <img src="images/2779585.jpg" alt="MiniDrive Logo" width="200" height="auto">
 </p>
 
 <p align="center">
