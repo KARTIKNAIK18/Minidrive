@@ -813,15 +813,15 @@ header button:hover {
 
 /* Default file icon image */
 .file-icon-img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    border-radius: 4px;
-    transition: transform 0.3s ease;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
-.file-icon-container:hover .file-icon-img {
-    transform: scale(1.1);
+.file-icon:hover .file-icon-img {
+  transform: scale(1.08);
 }
 
 /* Fallback icon if image fails to load */
@@ -868,41 +868,7 @@ header button:hover {
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-.file-icon {
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-/* File type-specific styling */
-.pdf-icon {
-    background-color: #feecec;
-}
-
-.doc-icon {
-    background-color: #e9f0fd;
-}
-
-.xls-icon {
-    background-color: #e9f8ef;
-}
-
-.ppt-icon {
-    background-color: #fff7e6;
-}
-
-.zip-icon {
-    background-color: #fff4e5;
-}
-
-.audio-icon {
-    background-color: #f5eeff;
-}
-
-.video-icon {
-    background-color: #fff0e6;
-}
 
 /* File type colors - Google Drive style */
 .fa-file-pdf, .fa-file-pdf-o {
@@ -1455,4 +1421,105 @@ body.dark-theme ::-webkit-scrollbar-thumb {
 
 body.dark-theme ::-webkit-scrollbar-thumb:hover {
     background: #718096;
+}
+
+/* Dark-mode overrides for the files table/list */
+body.dark-theme .files-table-container {
+  background-color: #0f1720; /* page panel behind table */
+  color: #e2e8f0;
+}
+
+body.dark-theme .files-table {
+  background-color: #111827; /* table background */
+  color: #e2e8f0;
+  border: 1px solid #26303a;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* header */
+body.dark-theme .files-table th {
+  background-color: #0b1320;
+  color: #e6eef6;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 8px 12px;
+}
+
+/* cells */
+body.dark-theme .files-table td {
+  background: transparent;
+  color: #e2e8f0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  padding: 8px 12px;
+}
+
+/* optional row striping */
+body.dark-theme .files-table tr:nth-child(even) td {
+  background-color: rgba(255,255,255,0.02);
+}
+
+/* icons and hover */
+body.dark-theme .file-icon-img {
+  filter: none; /* adjust if icons need tinting */
+}
+body.dark-theme .file-icon:hover .file-icon-img {
+  transform: scale(1.08);
+}
+
+/* If a library's rules override yours, increase specificity */
+body.dark-theme .files-table-container .files-table th,
+body.dark-theme .files-table-container .files-table td {
+  color: #e2e8f0;
+}
+
+/* Last-resort (use sparingly) */
+body.dark-theme .files-table,
+body.dark-theme .files-table th,
+body.dark-theme .files-table td {
+  background-color: #111827 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Dark-mode for the content section and its header */
+body.dark-theme .content-section {
+  background-color: #0f1720; /* panel background */
+  color: #e2e8f0;            /* default text */
+  border: 1px solid #26303a; /* optional border */
+  padding: 16px;
+}
+
+body.dark-theme .content-section .section-header {
+  background-color: transparent; /* or a slightly darker strip */
+  color: #e6eef6;
+  font-weight: 600;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Common nested elements */
+body.dark-theme .content-section p,
+body.dark-theme .content-section span,
+body.dark-theme .content-section a {
+  color: #cbd5e1;
+}
+
+/* If you have headings inside the header */
+body.dark-theme .content-section .section-header h1,
+body.dark-theme .content-section .section-header h2 {
+  color: #e6eef6;
+}
+
+/* If the header includes controls/buttons */
+body.dark-theme .content-section .section-header .btn,
+body.dark-theme .content-section .section-header button {
+  background: #2b3440;
+  color: #e2e8f0;
+  border: 1px solid #374151;
+}
+
+/* Row/box shadow adjustments to avoid too-bright shadows */
+body.dark-theme .content-section,
+body.dark-theme .content-section .section-header {
+  box-shadow: none; /* or use a subtle dark shadow */
 }
