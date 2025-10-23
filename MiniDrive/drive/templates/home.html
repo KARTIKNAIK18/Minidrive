@@ -8,67 +8,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="{% static 'drive/home.css' %}">
 	
-	<!-- Custom template filter for file extensions -->
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			function getFileExtension(filename) {
-				return filename.split('.').pop().toLowerCase();
-			}
-			
-			document.querySelectorAll('.file-row').forEach(function(row) {
-				const filename = row.querySelector('.file-name').textContent;
-				const extension = getFileExtension(filename);
-				const iconContainer = row.querySelector('.file-icon-container');
-				
-				if (iconContainer) {
-					switch(extension) {
-						case 'pdf':
-							iconContainer.classList.add('pdf-icon');
-							iconContainer.innerHTML = '<i class="fas fa-file-pdf file-icon"></i>';
-							break;
-						case 'doc':
-						case 'docx':
-							iconContainer.classList.add('doc-icon');
-							iconContainer.innerHTML = '<i class="fas fa-file-word file-icon"></i>';
-							break;
-						case 'xls':
-						case 'xlsx':
-							iconContainer.classList.add('xls-icon');
-							iconContainer.innerHTML = '<i class="fas fa-file-excel file-icon"></i>';
-							break;
-						case 'ppt':
-						case 'pptx':
-							iconContainer.classList.add('ppt-icon');
-							iconContainer.innerHTML = '<i class="fas fa-file-powerpoint file-icon"></i>';
-							break;
-						case 'zip':
-						case 'rar':
-							iconContainer.classList.add('zip-icon');
-							iconContainer.innerHTML = '<i class="fas fa-file-archive file-icon"></i>';
-							break;
-						case 'mp3':
-						case 'wav':
-							iconContainer.classList.add('audio-icon');
-							iconContainer.innerHTML = '<i class="fas fa-file-audio file-icon"></i>';
-							break;
-						case 'mp4':
-						case 'mov':
-							iconContainer.classList.add('video-icon');
-							iconContainer.innerHTML = '<i class="fas fa-file-video file-icon"></i>';
-							break;
-						case 'jpg':
-						case 'jpeg':
-						case 'png':
-						case 'gif':
-							// We'll handle images separately
-							break;
-						default:
-							iconContainer.innerHTML = '<i class="fas fa-file-alt file-icon"></i>';
-					}
-				}
-			});
-		});
-	</script>
+	<!-- Using default image for all files -->
 </head>
 <body>
 	<!-- Header -->
@@ -85,7 +25,10 @@
 			</div>
 		</form>
 		<div class="header-buttons">
-			<button class="upload-btn" onclick="location.href='/home/upload/'"><i class="fas fa-upload"></i> Upload</button>
+			<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+				<i class="fas fa-moon theme-icon"></i>
+			</button>
+			<button class="upload-btn" onclick="window.location.href='upload/'"><i class="fas fa-upload"></i> Upload</button>
 			<button class="folder-btn" onclick="location.href='/new-folder/'"><i class="fas fa-folder-plus"></i> New Folder</button>
 			<div class="user-profile">
 				<img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" alt="User" class="avatar">
@@ -157,18 +100,10 @@
 									<td class="file-name-cell">
 										<a href="{{ file.url }}" target="_blank" class="file-link">
 											<div class="file-info">
-												{% if ".jpg" in file.filename|lower or ".jpeg" in file.filename|lower or ".png" in file.filename|lower or ".gif" in file.filename|lower %}
-													<div class="file-thumbnail">
-														<img src="{{ file.url }}" alt="{{ file.filename }}" class="thumbnail-img">
-														<div class="image-overlay">
-															<i class="fas fa-image"></i>
-														</div>
-													</div>
-												{% else %}
-													<div class="file-icon-container">
-														<i class="fas fa-file-alt file-icon"></i>
-													</div>
-												{% endif %}
+												<div class="file-icon-container">
+													<img src="{% static 'drive/images/file.jpg' %}" alt="File" class="file-icon-img"		>
+													<i class="fas fa-file-alt file-icon-fallback" style="display: none;"></i>
+												</div>
 												<span class="file-name">{{ file.filename }}</span>
 											</div>
 										</a>
@@ -264,12 +199,39 @@
 		</div>
 	</div>
 	
-	<!-- Simple JavaScript for demonstration -->
+	<!-- JavaScript for theme switching and functionality -->
 	<script>
-		// This would be expanded in a real application
+		// Theme switching functionality
+		function toggleTheme() {
+			const body = document.body;
+			const themeIcon = document.querySelector('.theme-icon');
+			
+			body.classList.toggle('dark-theme');
+			
+			if (body.classList.contains('dark-theme')) {
+				themeIcon.classList.remove('fa-moon');
+				themeIcon.classList.add('fa-sun');
+				localStorage.setItem('theme', 'dark');
+			} else {
+				themeIcon.classList.remove('fa-sun');
+				themeIcon.classList.add('fa-moon');
+				localStorage.setItem('theme', 'light');
+			}
+		}
+
+		// Load saved theme on page load
 		document.addEventListener('DOMContentLoaded', function() {
 			console.log('MiniDrive interface loaded');
-			// Toggle between grid and list views would go here
+			
+			// Load saved theme
+			const savedTheme = localStorage.getItem('theme');
+			const themeIcon = document.querySelector('.theme-icon');
+			
+			if (savedTheme === 'dark') {
+				document.body.classList.add('dark-theme');
+				themeIcon.classList.remove('fa-moon');
+				themeIcon.classList.add('fa-sun');
+			}
 		});
 	</script>
 </body>

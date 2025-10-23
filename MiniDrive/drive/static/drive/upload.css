@@ -247,3 +247,139 @@ body {
     height: 40px;
   }
 }
+
+/* Theme Toggle Button */
+.theme-toggle-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.theme-toggle {
+  background: #4299e1;
+  border: none;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(66, 153, 225, 0.3);
+}
+
+.theme-toggle:hover {
+  background: #3182ce;
+  transform: scale(1.1);
+}
+
+.theme-icon {
+  font-size: 16px;
+}
+
+/* DARK THEME STYLES */
+body.dark-theme {
+  background-color: #1a202c;
+  color: #e2e8f0;
+}
+
+/* Dark theme - Upload container */
+body.dark-theme .upload-container {
+  background: #2d3748;
+  color: #e2e8f0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .upload-container h2 {
+  color: #e2e8f0;
+}
+
+body.dark-theme .upload-container p {
+  color: #a0aec0;
+}
+
+/* Dark theme - File input */
+body.dark-theme .file-input label {
+  background: #4a5568;
+  color: #e2e8f0;
+  border-color: #718096;
+}
+
+body.dark-theme .file-input label:hover {
+  background: #2d3748;
+  border-color: #4299e1;
+  color: #90cdf4;
+}
+
+body.dark-theme .file-input label.highlight {
+  background: #2c5282;
+  border-color: #4299e1;
+  color: #90cdf4;
+}
+
+body.dark-theme .file-input label.file-selected {
+  background: #2f855a;
+  border-color: #48bb78;
+  color: #9ae6b4;
+}
+
+body.dark-theme #file-name {
+  background-color: #4a5568;
+  color: #e2e8f0;
+  border-left-color: #4299e1;
+}
+
+/* Dark theme - Upload button */
+body.dark-theme .upload-btn {
+  background-color: #4299e1;
+}
+
+body.dark-theme .upload-btn:hover {
+  background-color: #3182ce;
+  box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);
+}
+
+/* Dark theme - Result section */
+body.dark-theme .result {
+  background-color: #22543d;
+  border-color: #48bb78;
+}
+
+body.dark-theme .result p {
+  color: #9ae6b4;
+}
+
+body.dark-theme .result a {
+  color: #90cdf4;
+  background-color: #2c5282;
+}
+
+body.dark-theme .result a:hover {
+  background-color: #2a69ac;
+}
+
+/* Dark theme - Error message */
+body.dark-theme .error-message {
+  background-color: #742a2a;
+  color: #feb2b2;
+}
+
+/* Dark theme - Back link */
+body.dark-theme .back-link {
+  color: #a0aec0;
+}
+
+body.dark-theme .back-link:hover {
+  color: #e2e8f0;
+}
+
+/* Dark theme - Theme toggle */
+body.dark-theme .theme-toggle {
+  background: #718096;
+}
+
+body.dark-theme .theme-toggle:hover {
+  background: #a0aec0;
+}

@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="{% static 'drive/upload.css' %}">
 </head>
 <body>
+    <div class="theme-toggle-container">
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+            <i class="fas fa-moon theme-icon"></i>
+        </button>
+    </div>
+
     <div class="upload-container">
         <h2><i class="fas fa-cloud-upload-alt"></i> Upload to MiniDrive</h2>
         <p>Select a file from your device to upload to your cloud storage</p>
@@ -106,6 +112,36 @@
                 fileName.textContent = files[0].name;
                 fileName.style.display = "block";
                 fileLabel.classList.add("file-selected");
+            }
+        }
+
+        // Theme switching functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-icon');
+            
+            body.classList.toggle('dark-theme');
+            
+            if (body.classList.contains('dark-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme on page load
+        const savedTheme = localStorage.getItem('theme');
+        const themeIcon = document.querySelector('.theme-icon');
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            if (themeIcon) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
             }
         }
     </script>
