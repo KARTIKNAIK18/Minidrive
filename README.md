@@ -122,18 +122,28 @@ python manage.py runserver
 - 🕒 File versioning
 
 ---
-<<<<<<< HEAD
 
-## images
-
-![Alt text](images/home.png)
-![Alt text](images/upload.png)
-![Alt text](images/uploaded.png)
-![Alt text](images/sucess.png)
-![Alt text](images/s3.png)
-
-=======
->>>>>>> f631c9510a308ac5e571ac007f1ec77eb746c95c
+<div align="center">
+ <b>🏠 Home Page</b><br>
+  <img src="images/home.png" alt="Home" width="850"/>
+ </div>
+  
+ <div align="center">
+   <b>📤 Upload Page</b><br>
+  <img src="images/upload.png" alt="Upload" width="850"/>
+  </div>
+  <div align="center">
+     <b>✅ Uploaded Files</b><br>
+  <img src="images/uploaded.png" alt="Uploaded" width="850"/>
+   </div>
+   <div align="center">
+    <b>🎉 Success Message</b><br>
+  <img src="images/sucess.png" alt="Success" width="650"/>
+    </div>
+    <div align="center">
+      <b>☁️ AWS S3 Integration</b><br>
+  <img src="images/s3.png" alt="S3" width="850"/>
+</div>
 
 ## 📜 License
 
