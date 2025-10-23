@@ -122,6 +122,7 @@ python manage.py runserver
 - 🕒 File versioning
 
 ---
+<<<<<<< HEAD
 
 ## images
 
@@ -131,6 +132,8 @@ python manage.py runserver
 ![Alt text](images/sucess.png)
 ![Alt text](images/s3.png)
 
+=======
+>>>>>>> f631c9510a308ac5e571ac007f1ec77eb746c95c
 
 ## 📜 License
 
