@@ -1,7 +1,7 @@
  <h1 align="center">MiniDrive </h1>
 
 <p align="center">
-  <img src="images/drive.jpg" alt="MiniDrive Banner" style="width:75%; height:250px; display:block;"
+  <img src="images/drive.jpg" alt="MiniDrive Banner" style="width:85%; height:250px; display:block;"
 </p>
 
 <p align="center">
