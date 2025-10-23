@@ -122,19 +122,7 @@ python manage.py runserver
 - 🕒 File versioning
 
 ---
-<<<<<<< HEAD
 
-
-## images
-
-![Alt text](images/home.png)
-![Alt text](images/upload.png)
-![Alt text](images/uploaded.png)
-![Alt text](images/  )
-![Alt text](images/s3.png)
-
-
-=======
 
 <div align="center">
  <b>🏠 Home Page</b><br>
