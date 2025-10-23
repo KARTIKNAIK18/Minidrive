@@ -1,7 +1,7 @@
  <h1 align="center">MiniDrive </h1>
 
 <p align="center">
-  <img src="images/drive.jpg" alt="MiniDrive Banner" style="width:75%; height:250px; display:block;"
+  <img src="images/drive.jpg" alt="MiniDrive Banner" style="width:85%; height:250px; display:block;"
 </p>
 
 <p align="center">
@@ -122,6 +122,7 @@ python manage.py runserver
 - 🕒 File versioning
 
 ---
+<<<<<<< HEAD
 
 
 ## images
@@ -133,6 +134,30 @@ python manage.py runserver
 ![Alt text](images/s3.png)
 
 
+=======
+
+<div align="center">
+ <b>🏠 Home Page</b><br>
+  <img src="images/home.png" alt="Home" width="850"/>
+ </div>
+  
+ <div align="center">
+   <b>📤 Upload Page</b><br>
+  <img src="images/upload.png" alt="Upload" width="850"/>
+  </div>
+  <div align="center">
+     <b>✅ Uploaded Files</b><br>
+  <img src="images/uploaded.png" alt="Uploaded" width="850"/>
+   </div>
+   <div align="center">
+    <b>🎉 Success Message</b><br>
+  <img src="images/sucess.png" alt="Success" width="650"/>
+    </div>
+    <div align="center">
+      <b>☁️ AWS S3 Integration</b><br>
+  <img src="images/s3.png" alt="S3" width="850"/>
+</div>
+>>>>>>> 4593beed1abe82c89f11dadcced5cd19b8190b84
 
 ## 📜 License
 
